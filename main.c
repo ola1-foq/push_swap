@@ -85,16 +85,40 @@ int checking_all(char**argv, int argc,int *arr)
 	}
 	return (1);
 }
+t_node *creating_node (int index)
+{
+	t_node *n1;
+	n1=malloc(sizeof(t_node));
+	if(!n1)
+		return (NULL);
+	n1->data = index;
+	n1->next =NULL;
+	return (n1);
+}
 void  filling(t_stack *a,int argc,int *arr)
 {
-
+	int i=1;
+	t_node *node;
+	while(arr[i]<argc)
+	{
+		node=creating_node(arr[i]);
+		if(!node)
+			return ;
+		node->next=a->element;
+		a->element=node;
+		a->size++;
+	}
+}
+void init_stack(t_stack *a)
+{
+	a->element=NULL;
+	a->size=-1;
 }
 int main(int argc,char**argv)
 {
 	t_stack *a;
 	t_stack *b;
 
-	
 
 	if(argc <2)
 		return(0);
@@ -116,6 +140,10 @@ int main(int argc,char**argv)
 	b=malloc(sizeof(t_stack));
 	if(!a || !b)
 		return(0);
+	init_stack(a);
+	init_stack(b);
+	filling(a,argc,arr);
+	free(arr);
 	
 	
 }
