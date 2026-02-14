@@ -1,10 +1,5 @@
 #ifndef PUSH_SWAP_H
 #define PUSH_SWAP_H
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-
 typedef struct s_node
 {
 	int data;
@@ -15,7 +10,6 @@ typedef struct s_stack
 {
 	t_node *element;
 	int size;
-	t_node *top;
 }	t_stack;
 
 

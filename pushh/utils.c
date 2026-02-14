@@ -42,9 +42,3 @@ int checking_max_min(char **argv)
 	}
 	return (1);
 }
-int	isempty(t_stack *s)
-{
-	if (s->size == -1)
-		return (1);
-	return (0);
-}
