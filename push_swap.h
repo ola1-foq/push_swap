@@ -19,9 +19,11 @@ typedef struct s_stack
 }	t_stack;
 
 
-int	ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 int is_num(char c);
 int checking_num(char**argv);
 int checking_dup(char **argv, int argc); 
+int	isempty(t_stack *s);
+int checking_max_min(char **argv);
 
 #endif

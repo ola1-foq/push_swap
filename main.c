@@ -8,6 +8,7 @@ int is_num(char y)
 		return (0);
 	return (1);
 }
+
 int checking_num(char**argv)
 {
 
@@ -53,6 +54,7 @@ int checking_dup(char **argv, int argc)
 	}
 	return (1);
 }
+
 int is_sorted(int	*arr, int size)
 {
 	int i;
@@ -66,6 +68,7 @@ int is_sorted(int	*arr, int size)
 	}
 	return (1);
 }
+
 int checking_all(char**argv, int argc,int *arr)
 {
 	if(!checking_num(argv) || !checking_dup(argv,argc))
@@ -85,6 +88,7 @@ int checking_all(char**argv, int argc,int *arr)
 	}
 	return (1);
 }
+
 t_node *creating_node (int index)
 {
 	t_node *n1;
@@ -95,6 +99,7 @@ t_node *creating_node (int index)
 	n1->next =NULL;
 	return (n1);
 }
+
 void  filling(t_stack *a,int argc,int *arr)
 {
 	int i=1;
@@ -109,11 +114,13 @@ void  filling(t_stack *a,int argc,int *arr)
 		a->size++;
 	}
 }
+
 void init_stack(t_stack *a)
 {
 	a->element=NULL;
 	a->size=-1;
 }
+
 int main(int argc,char**argv)
 {
 	t_stack *a;
