@@ -3,6 +3,9 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
 SRC= main.c \
 	utils.c \
+	sort.c \
+	
+
 
 OBJ = $(SRC:.c=.o)
 
