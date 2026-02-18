@@ -89,36 +89,60 @@ int checking_all(char**argv, int argc,int *arr)
 	return (1);
 }
 
-t_node *creating_node (int index)
+t_node *creating_node (int data)
 {
 	t_node *n1;
 	n1=malloc(sizeof(t_node));
 	if(!n1)
 		return (NULL);
-	n1->data = index;
+	n1->data = data;
+	n1->index = 0;
 	n1->next =NULL;
 	return (n1);
 }
 
+void assign_index(t_stack *a, int *arr, int size)
+{
+	t_node *tmp;
+	int i;
+	int rank;
+
+	tmp = a->top;
+	while (tmp)
+	{
+		rank = 0;
+		i = 0;
+		while (i < size)
+		{
+			if (arr[i] < tmp->data)
+				rank++;
+			i++;
+		}
+		tmp->index = rank;
+		tmp = tmp->next;
+	}
+}
+
 void  filling(t_stack *a,int argc,int *arr)
 {
-	int i=1;
+	int i = argc - 2;
 	t_node *node;
-	while(arr[i]<argc)
+	while(i >= 0)
 	{
 		node=creating_node(arr[i]);
 		if(!node)
 			return ;
-		node->next=a->element;
-		a->element=node;
+		node->next=a->top;
+		a->top=node;
 		a->size++;
+		i--;
 	}
 }
 
 void init_stack(t_stack *a)
 {
-	a->element=NULL;
-	a->size=-1;
+	a->top=NULL;
+	a->size=0;
 }
 
 int main(int argc,char**argv)
@@ -150,8 +174,13 @@ int main(int argc,char**argv)
 	init_stack(a);
 	init_stack(b);
 	filling(a,argc,arr);
+	assign_index(a, arr, argc - 1);
+
+	if (a->size > 6)
+		radix_sort(&a, &b);
+	else if (a->size > 1)
+		mini_sort(&a, &b);
+
 	free(arr);
-	
-	
 }
 

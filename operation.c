@@ -5,9 +5,9 @@ void sa_op(t_stack *a)
 	if(a->size < 2)
 		return ;
 	int temp;
-	temp = a->element->data;
-	a->element->data = a->element->next->data;
-	a->element->next->data = temp;
+	temp = a->top->data;
+	a->top->data = a->top->next->data;
+	a->top->next->data = temp;
 	write(1,"sa\n",3);
 }
 void sb_op(t_stack *b)
@@ -15,9 +15,9 @@ void sb_op(t_stack *b)
 	if(b->size < 2)
 		return ;
 	int temp;
-	temp = b->element->data;
-	b->element->data = b->element->next->data;
-	b->element->next->data = temp;
+	temp = b->top->data;
+	b->top->data = b->top->next->data;
+	b->top->next->data = temp;
 	write(1,"sb\n",3);
 }
 
@@ -35,7 +35,7 @@ void push(t_stack *a,int data)
 	if(isempty(a))
 		return ;
 	a->size++;
-	new_node->next = a->element;
+	new_node->next = a->top;
 	a->top=new_node;
 }
 void pop(t_stack *a)
@@ -45,7 +45,7 @@ void pop(t_stack *a)
 	if(isempty(a))
 		return ;
 	a->size--;
-	a->element = a->element->next;
+	a->top = a->top->next;
 }
 void pa_op(t_stack *a,t_stack *b)
 {
@@ -54,7 +54,7 @@ void pa_op(t_stack *a,t_stack *b)
 	if(isempty(b))
 		return ;
 	int temp;
-	temp = b->element->data;
+	temp = b->top->data;
 	pop(b);
 	push(a,temp);
 	write(1,"pa\n",3);
@@ -66,7 +66,7 @@ void pb_op(t_stack *a,t_stack *b)
 	if(isempty(a))
 		return ;
 	int temp;
-	temp = a->element->data;
+	temp = a->top->data;
 	pop(a);
 	push(b,temp);
 	write(1,"pb\n",3);
@@ -124,7 +124,7 @@ void rra_op(t_stack *a)
 	u->next = tmp;
 	a->top = u;
 	tmp->next = NULL;
-	write(1, "rra\n", 3);
+	write(1, "rra\n", 4);
 }
 void rrb_op(t_stack *b)
 {
@@ -139,12 +139,12 @@ void rrb_op(t_stack *b)
 	u->next = tmp;
 	b->top = u;
 	tmp->next = NULL;
-	write(1, "rrb\n", 3);
+	write(1, "rrb\n", 4);
 }
 void rrr_op(t_stack *a,t_stack *b)
 {	if (isempty(b) || isempty(a))
 		return ;
 	rra_op(a);
 	rrb_op(b);
-	write(1, "rrr\n", 3);
+	write(1, "rrr\n", 4);
 }

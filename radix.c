@@ -6,7 +6,7 @@
 /*   By: oalfoqha <oalfoqha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:28:09 by oalfoqha          #+#    #+#             */
-/*   Updated: 2026/02/16 19:26:11 by oalfoqha         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:42:35 by oalfoqha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int max_bit(t_stack *list)
 {
-    t_stack *tmp ;
+    t_node *tmp;
     int  max_len;
     int i;
     
     i = 0;
-    tmp =list;
+    tmp = list->top;
     while(tmp)
     {
-        tmp = tmp ->next;
+        tmp = tmp->next;
         i++;
     }
     i--;
@@ -30,7 +30,35 @@ static int max_bit(t_stack *list)
     while(i)
     {
         i = i / 2;
-        max_bit++;
+        max_len++;
     }
-    return(max_bit);
+    return(max_len);
+}
+void radix_sort(t_stack **a, t_stack **b)
+{
+    int i;
+    int j;
+    int max_bits;
+    int size;
+    
+    if (!a || !*a || !b)
+        return;
+    max_bits = max_bit(*a);
+    size = (*a)->size;
+    i = 0;
+    while (i < max_bits)
+    {
+        j = 0;
+        while (j < size)
+        {
+            if ((*a)->top && (((*a)->top->index >> i) & 1) == 0)
+                pb_op(*a, *b);
+            else if ((*a)->top)
+                ra_op(*a);
+            j++;
+        }
+        while (*b && (*b)->size > 0)
+            pa_op(*a, *b);
+        i++;
+    }
 }

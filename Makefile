@@ -3,7 +3,9 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
 SRC= main.c \
 	utils.c \
-	sort.c \
+	radix.c \
+	operation.c \
+	sort_small.c \
 	
 
 

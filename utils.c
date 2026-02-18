@@ -44,7 +44,25 @@ int checking_max_min(char **argv)
 }
 int	isempty(t_stack *s)
 {
-	if (s->size == -1)
+	if (s->size == 0)
 		return (1);
 	return (0);
+}
+
+int	ft_lstsize(t_stack *lst)
+{
+	int	i;
+	t_node *tmp;
+
+	i = 0;
+	if (lst)
+	{
+		tmp = lst->top;
+		while (tmp)
+		{	
+			i++;
+			tmp = tmp->next;
+		}
+	}
+	return (i);
 }
